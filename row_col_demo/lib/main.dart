@@ -10,48 +10,53 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      home: MyHomePage(),
+      debugShowCheckedModeBanner: false,
+      title: "widget tutorial",
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _HomePageState extends State<HomePage> {
+  int count = 0;
+
+  void plus() {
+    setState(() {
+      count++;
+      print(count);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.lime,
-          title: Text('flutter row tutorial'),
+      appBar: AppBar(
+        title: Text(" WIDGET "),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              "You have pushed button times",
+              style: TextStyle(fontSize: 20.0),
+            ),
+            Text(
+              '$count',
+              style: Theme.of(context).textTheme.displayLarge,
+            ),
+          ],
         ),
-        body: Container(
-          color: Colors.white70,
-          width: double.infinity,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text("Number onen"),
-              Text("Number twoo"),
-              Text("Number three"),
-              Text("Number Four"),
-              //use row inside the colum
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text("Number onen"),
-                  Text("Number twoo"),
-                  Text("Number three"),
-                  Text("Number Four"),
-                ],
-              )
-            ],
-          ),
-        ));
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: plus,
+        child: Icon(Icons.add),
+      ),
+    );
   }
 }
